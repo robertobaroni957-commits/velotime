@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { supabase } from '../../lib/supabase';
-import { useAuth } from '../../hooks/useAuth';
-import { useToast } from '../../hooks/useToast';
-import SegmentLeaderboard from '../features/segments/SegmentLeaderboard';
-import SegmentCard from '../features/segments/SegmentCard';
+import { supabase } from '../lib/supabase';
+import { useAuth } from '../hooks/useAuth';
+import { useToast } from '../hooks/useToast';
+import SegmentLeaderboard from '../components/features/segments/SegmentLeaderboard';
+import SegmentCard from '../components/features/segments/SegmentCard';
 import './EventDetails.css';
 
 const EventDetails = () => {
