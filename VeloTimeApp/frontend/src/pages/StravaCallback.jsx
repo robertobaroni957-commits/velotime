@@ -66,7 +66,16 @@ const StravaCallback = () => {
 
         if (data?.success) {
           setStatus('Sincronizzazione completata!');
-          showSuccess('Strava collegato con successo!');
+          
+          // Se il server ha restituito una sessione, effettuiamo il login automatico
+          if (data.session) {
+            const { error: sessionError } = await supabase.auth.setSession(data.session);
+            if (sessionError) throw sessionError;
+            showSuccess('Accesso con Strava effettuato!');
+          } else {
+            showSuccess('Strava collegato con successo!');
+          }
+
           await refreshStatus();
           navigate('/profile');
         } else {
