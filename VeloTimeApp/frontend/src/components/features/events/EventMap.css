@@ -1,0 +1,39 @@
+.event-map-wrapper {
+  width: 100%;
+  height: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  margin: 1.5rem 0;
+}
+
+.leaflet-container-custom {
+  width: 100%;
+  height: 100%;
+  background: #111 !important;
+}
+
+.map-error {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #222;
+  color: #888;
+  border-radius: 12px;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+/* Customizing Leaflet Popups to match dark theme */
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: #333 !important;
+  color: #fff !important;
+}
+
+/* Fix per i bordi bianchi nelle tile durante il caricamento */
+.leaflet-container {
+    background-color: #111 !important;
+}

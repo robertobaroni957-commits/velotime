@@ -1,0 +1,83 @@
+.candidate-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.candidate-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateX(4px);
+    border-color: rgba(252, 76, 2, 0.3);
+}
+
+.candidate-card.selected {
+    background: rgba(252, 76, 2, 0.08);
+    border-color: #FC4C02;
+}
+
+.candidate-checkbox .checkbox-circle {
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.candidate-card.selected .checkbox-circle {
+    background: #FC4C02;
+    border-color: #FC4C02;
+}
+
+.check-mark {
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.candidate-info {
+    flex: 1;
+}
+
+.candidate-name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.candidate-name {
+    color: white;
+    font-weight: 600;
+}
+
+.candidate-cat {
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.candidate-cat.flat { background: #3f3f46; color: #a1a1aa; }
+.candidate-cat.cat-4 { background: #22c55e; color: white; }
+.candidate-cat.cat-3 { background: #eab308; color: black; }
+.candidate-cat.cat-2 { background: #f97316; color: white; }
+.candidate-cat.cat-1 { background: #ef4444; color: white; }
+.candidate-cat.hc { background: #a855f7; color: white; }
+
+.candidate-stats {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    color: #a1a1aa;
+}

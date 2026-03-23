@@ -1,0 +1,96 @@
+.leaderboard-container {
+  background: var(--bg-card, #ffffff);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin-top: 24px;
+}
+
+.leaderboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.leaderboard-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--text-primary, #111827);
+}
+
+.btn-sync {
+  background-color: var(--primary-color, #fc4c02);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-sync:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.leaderboard-table th {
+  padding: 12px;
+  border-bottom: 2px solid var(--border-color, #e5e7eb);
+  color: var(--text-secondary, #6b7280);
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.leaderboard-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
+  font-size: 0.95rem;
+}
+
+.athlete-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.athlete-cell img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.winner-row {
+  background-color: rgba(252, 76, 2, 0.05);
+}
+
+.winner-row td:first-child {
+  font-weight: bold;
+  color: #fbbf24;
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px !important;
+  color: var(--text-secondary, #6b7280);
+}
+
+.leaderboard-loading {
+  padding: 20px;
+  text-align: center;
+  color: var(--text-secondary, #6b7280);
+}

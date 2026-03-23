@@ -1,0 +1,12 @@
+.page-transition-wrapper {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.page-transition-wrapper.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}

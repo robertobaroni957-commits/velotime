@@ -1,0 +1,45 @@
+.strava-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: #fc4c02;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.strava-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(252, 76, 2, 0.4);
+  background-color: #e34502;
+}
+
+.strava-btn.connected {
+  background-color: #18181b;
+  border: 1px solid #27272a;
+  color: #a1a1aa;
+}
+
+.strava-btn.connected:hover:not(:disabled) {
+  border-color: #ef4444;
+  color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.05);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
+}
+
+.strava-btn:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.strava-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

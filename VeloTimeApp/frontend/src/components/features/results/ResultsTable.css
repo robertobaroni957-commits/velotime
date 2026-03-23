@@ -1,0 +1,84 @@
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  background-color: #18181b;
+  border-radius: 0.5rem;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9375rem;
+}
+
+.results-table thead th {
+  background-color: #27272a;
+  color: #a1a1aa;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 1rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.results-table tbody tr {
+  border-bottom: 1px solid #27272a;
+  transition: background-color 0.2s;
+}
+
+.results-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.results-table tbody tr:nth-child(even) {
+  background-color: rgba(39, 39, 42, 0.3);
+}
+
+.results-table tbody tr:hover {
+  background-color: rgba(252, 76, 2, 0.05);
+}
+
+.results-table td {
+  padding: 1rem 1.5rem;
+  color: #d4d4d8;
+}
+
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  background-color: #3f3f46;
+  color: white;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.athlete-cell {
+  font-weight: 500;
+  color: white;
+}
+
+/* Podium Styles */
+.podium-row.rank-1 .rank-badge { background-color: #facc15; color: #422006; }
+.podium-row.rank-2 .rank-badge { background-color: #e5e7eb; color: #111827; }
+.podium-row.rank-3 .rank-badge { background-color: #d97706; color: white; }
+
+.podium-row.rank-1 .athlete-cell { color: #fef08a; }
+.podium-row.rank-2 .athlete-cell { color: #f3f4f6; }
+.podium-row.rank-3 .athlete-cell { color: #fbbf24; }
+
+.no-results {
+  padding: 3rem;
+  text-align: center;
+  color: #71717a;
+  background-color: #18181b;
+  border: 1px dashed #27272a;
+  border-radius: 0.5rem;
+}

@@ -1,0 +1,65 @@
+.profile-skeleton {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.skeleton-profile-header {
+  background-color: #18181b;
+  border: 1px solid #27272a;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.skeleton-profile-main {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.skeleton-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 640px) {
+  .skeleton-stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .skeleton-stats-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.skeleton-stat-card {
+  background-color: #18181b;
+  border: 1px solid #27272a;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.skeleton-events-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .skeleton-events-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .skeleton-events-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-6 { margin-bottom: 1.5rem; }

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeloTime - Documentazione Tecnica & Architettura</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --strava-orange: #fc4c02;
+            --supabase-green: #3ecf8e;
+            --dark-bg: #09090b;
+            --card-bg: #18181b;
+            --text-main: #fafafa;
+            --text-muted: #a1a1aa;
+            --border: #27272a;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1 { font-size: 3rem; margin-bottom: 10px; color: var(--strava-orange); }
+        h2 { font-size: 1.8rem; margin-top: 40px; border-left: 4px solid var(--supabase-green); padding-left: 15px; }
+        p { color: var(--text-muted); font-size: 1.1rem; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            transition: transform 0.2s;
+        }
+
+        .card:hover { transform: translateY(-5px); border-color: var(--strava-orange); }
+
+        .card h3 { margin-top: 0; color: var(--strava-orange); }
+
+        .diagram-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 8px;
+            background: var(--border);
+        }
+
+        .tag-react { color: #61dafb; }
+        .tag-supabase { color: var(--supabase-green); }
+        .tag-strava { color: var(--strava-orange); }
+
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>VeloTime 🏁</h1>
+        <p>La piattaforma definitiva per trasformare le tue uscite Strava in sfide competitive reali.</p>
+        <div style="margin-top: 20px;">
+            <span class="tech-tag tag-react">React + Vite</span>
+            <span class="tech-tag tag-supabase">Supabase Backend</span>
+            <span class="tech-tag tag-strava">Strava API</span>
+        </div>
+    </header>
+
+    <section>
+        <h2>Panoramica del Progetto</h2>
+        <p>VeloTime permette ai ciclisti di connettere il proprio account Strava, importare le attività recenti e convertirle in "Eventi" o "Sfide". Gli altri utenti possono partecipare a queste sfide e confrontare i propri tempi su segmenti specifici, scalando la Hall of Fame globale.</p>
+    </section>
+
+    <section>
+        <h2>Architettura del Sistema</h2>
+        <div class="diagram-container">
+            <pre class="mermaid">
+            graph TD
+                User((Utente)) --> Frontend[React SPA / Vite]
+                Frontend --> Auth[Supabase Auth]
+                Frontend --> DB[(PostgreSQL / Supabase)]
+                Frontend --> Functions{Edge Functions}
+                Functions --> Strava[Strava API OAuth2]
+                Functions --> DB
+                DB --> Realtime[Supabase Realtime Feed]
+                Realtime --> User
+            </pre>
+        </div>
+    </section>
+
+    <section>
+        <h2>Flusso di Integrazione Strava (OAuth2)</h2>
+        <div class="diagram-container">
+            <pre class="mermaid">
+            sequenceDiagram
+                participant U as Utente
+                participant F as Frontend
+                participant S as Strava API
+                participant E as Edge Function (Exchange)
+                participant DB as Database
+
+                U->>F: Clicca "Connetti Strava"
+                F->>S: Redirect a Strava Auth (scope: read,activity)
+                S-->>U: Chiede Autorizzazione
+                U->>S: Autorizza
+                S-->>F: Redirect a /callback?code=AUTH_CODE
+                F->>E: Invia AUTH_CODE + JWT Utente
+                E->>S: POST /oauth/token (con Client Secret)
+                S-->>E: Restituisce Access/Refresh Tokens
+                E->>DB: Upsert Tokens (Tabella strava_tokens)
+                E-->>F: Successo!
+                F->>U: Mostra Attività Importate
+            </pre>
+        </div>
+    </section>
+
+    <section>
+        <h2>Funzionalità Chiave</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>🔄 Strava Sync</h3>
+                <p>Sincronizzazione automatica delle attività. Gestione intelligente del <strong>Refresh Token</strong> ogni volta che l'utente accede.</p>
+            </div>
+            <div class="card">
+                <h3>🏆 Hall of Fame</h3>
+                <p>Classifica globale dinamica basata su un sistema di punteggio: 100pt vittoria, 10pt partecipazione, bonus velocità.</p>
+            </div>
+            <div class="card">
+                <h3>⚡ Social Feed</h3>
+                <p>Feed in tempo reale che mostra le nuove sfide create e i record battuti, usando <strong>Supabase Realtime</strong>.</p>
+            </div>
+            <div class="card">
+                <h3>📍 Segment Tracking</h3>
+                <p>Estrazione automatica dei segmenti Strava durante la creazione dell'evento per sfide mirate sulle salite.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Schema Database (Semplificato)</h2>
+        <div class="diagram-container">
+            <pre class="mermaid">
+            erDiagram
+                PROFILES ||--o{ STRAVA_TOKENS : "possiede"
+                PROFILES ||--o{ EVENTS : "crea"
+                PROFILES ||--o{ EVENT_RESULTS : "ottiene"
+                EVENTS ||--o{ SEGMENTS : "include"
+                EVENTS ||--o{ EVENT_RESULTS : "genera"
+                PROFILES {
+                    uuid id PK
+                    string full_name
+                    bigint strava_athlete_id
+                }
+                STRAVA_TOKENS {
+                    uuid user_id FK
+                    string access_token
+                    string refresh_token
+                    bigint expires_at
+                }
+                EVENTS {
+                    uuid id PK
+                    string name
+                    float distance
+                    string map_polyline
+                }
+            </pre>
+        </div>
+    </section>
+
+    <footer>
+        <p>VeloTime Documentation &copy; 2026 - Powered by Gemini CLI & Supabase</p>
+    </footer>
+</div>
+
+<script>
+    mermaid.initialize({ 
+        startOnLoad: true,
+        theme: 'forest',
+        securityLevel: 'loose',
+    });
+</script>
+</body>
+</html>

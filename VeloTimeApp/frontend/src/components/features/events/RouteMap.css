@@ -1,0 +1,30 @@
+.route-map-container {
+  width: 100%;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid #27272a;
+  background-color: #09090b;
+}
+
+.leaflet-map-frame {
+  height: 400px;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Fix per i tiles in dark mode (opzionale, per un look più moderno) */
+.leaflet-tile-pane {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+.map-placeholder-error {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #18181b;
+  border: 1px dashed #27272a;
+  border-radius: 0.75rem;
+  color: #71717a;
+  font-size: 0.875rem;
+}

@@ -1,0 +1,212 @@
+/* ==========================================================================
+   VELOTIME DESIGN SYSTEM v2.0
+   Theme: Carbon & Tarmac
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@700&display=swap');
+
+:root {
+  /* --- COLOR PALETTE --- */
+  
+  /* Neutral (Slate/Zinc) */
+  --color-bg-page: #09090b;       /* Zinc 950 */
+  --color-bg-surface: #18181b;    /* Zinc 900 */
+  --color-bg-card: #27272a;       /* Zinc 800 */
+  --color-bg-elevated: #3f3f46;   /* Zinc 700 */
+  
+  /* Text */
+  --color-text-primary: #fafafa;  /* Zinc 50 */
+  --color-text-secondary: #a1a1aa;/* Zinc 400 */
+  --color-text-tertiary: #52525b; /* Zinc 600 */
+
+  /* Brand / Action */
+  --color-primary: #fc4c02;       /* Strava Orange */
+  --color-primary-dark: #cc3d02;
+  --color-accent: #22d3ee;        /* Cyan 400 (Data/Speed) */
+  --color-success: #22c55e;       /* Green 500 */
+  --color-danger: #ef4444;        /* Red 500 */
+  --color-warning: #f59e0b;       /* Amber 500 */
+
+  /* Borders & Dividers */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  
+  /* --- TYPOGRAPHY --- */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* --- SPACING SYSTEM (4px grid) --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* --- RADIUS --- */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  /* --- SHADOWS --- */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+  --shadow-glow: 0 0 20px rgba(252, 76, 2, 0.15);
+
+  /* --- Z-INDEX --- */
+  --z-nav: 100;
+  --z-modal: 200;
+  --z-toast: 300;
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* --- UTILITIES --- */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.hidden-mobile { display: none; }
+.hidden-desktop { display: block; }
+
+@media (min-width: 768px) {
+  .hidden-mobile { display: block; }
+  .hidden-desktop { display: none; }
+}
+
+/* --- COMPONENTS --- */
+
+/* 1. Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  gap: var(--space-2);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  box-shadow: var(--shadow-glow);
+}
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+  border: 1px solid var(--border-subtle);
+}
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--color-bg-elevated);
+  border-color: var(--border-strong);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+}
+.btn-ghost:hover:not(:disabled) {
+  color: var(--color-text-primary);
+  background: rgba(255,255,255,0.05);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-full { width: 100%; }
+
+/* 2. Cards */
+.card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  transition: border-color 0.2s;
+}
+
+/* 3. Typography Helpers */
+.text-h1 { font-size: 2rem; font-weight: 900; letter-spacing: -0.02em; }
+.text-h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; }
+.text-h3 { font-size: 1.25rem; font-weight: 700; }
+.text-sm { font-size: 0.875rem; color: var(--color-text-secondary); }
+.text-mono { font-family: var(--font-mono); }
+.text-accent { color: var(--color-accent); }
+
+/* 4. Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.badge-active { background: rgba(34, 197, 94, 0.15); color: var(--color-success); }
+.badge-orange { background: rgba(252, 76, 2, 0.15); color: var(--color-primary); }
+
+/* --- ANIMATIONS --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- SKELETON LOADING --- */
+.skeleton {
+  background: linear-gradient(90deg, var(--color-bg-card) 25%, var(--color-bg-elevated) 50%, var(--color-bg-card) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* --- LAYOUTS --- */
+.grid-2 { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
+@media (min-width: 768px) { .grid-2 { grid-template-columns: 1fr 1fr; } }

@@ -1,0 +1,68 @@
+:root {
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-sm: 200ms;
+  --duration-md: 300ms;
+  --duration-lg: 400ms;
+}
+
+/* Base Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Utility Classes */
+.fade-in { animation: fadeIn var(--duration-md) var(--ease-out) forwards; }
+.fade-in-up { animation: fadeInUp var(--duration-md) var(--ease-out) forwards; }
+.scale-in { animation: scaleIn var(--duration-md) var(--ease-out) forwards; }
+
+.delay-100 { animation-delay: 100ms; opacity: 0; animation-fill-mode: forwards; }
+.delay-200 { animation-delay: 200ms; opacity: 0; animation-fill-mode: forwards; }
+.delay-300 { animation-delay: 300ms; opacity: 0; animation-fill-mode: forwards; }
+
+/* Micro-interactions */
+.hover-scale {
+  transition: transform var(--duration-sm) var(--ease-out);
+}
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+.hover-glow {
+  transition: box-shadow var(--duration-sm) var(--ease-out);
+}
+.hover-glow:hover {
+  box-shadow: 0 0 15px rgba(0, 112, 243, 0.4);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
