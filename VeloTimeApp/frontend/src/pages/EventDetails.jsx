@@ -103,12 +103,23 @@ const EventDetails = () => {
   const handleCompute = async () => {
     setComputing(true);
     try {
-      const { data, error } = await supabase.functions.invoke('compute-leaderboard', { body: { event_id: id } });
-      if (error) throw error;
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${apiUrl}/api/events/${id}/compute-leaderboard`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) throw new Error(data.error || 'Errore aggiornamento classifica.');
+      
       showSuccess('Classifica aggiornata!');
       fetchAllData();
     } catch (err) {
-      showError('Errore aggiornamento classifica.');
+      console.error('Compute error:', err);
+      showError(err.message || 'Errore aggiornamento classifica.');
     } finally {
       setComputing(false);
     }
