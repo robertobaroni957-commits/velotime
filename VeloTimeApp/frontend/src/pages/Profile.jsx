@@ -9,7 +9,7 @@ import ActivitiesList from '../components/features/strava/ActivitiesList';
 import './Profile.css';
 
 const Profile = () => {
-  const { user, logout, isAuthenticated } = useAuth();
+  const { user, logout, isAuthenticated, loading: authLoading } = useAuth();
   const { isStravaConnected, refreshStatus, loading: stravaLoading } = useStrava();
   const navigate = useNavigate();
   
@@ -35,6 +35,16 @@ const Profile = () => {
       fetchProfile();
     }
   }, [isAuthenticated, fetchProfile]);
+
+  // Se l'autenticazione sta ancora caricando, non mostrare nulla o un loader
+  if (authLoading) {
+    return (
+      <div className="profile-loading-container">
+        <div className="loader"></div>
+        <p>Verifica accesso...</p>
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return (
