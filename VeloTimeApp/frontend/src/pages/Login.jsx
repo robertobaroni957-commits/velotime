@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { useStrava } from '../hooks/useStrava';
 import PageTransition from '../components/common/PageTransition';
 import './Login.css';
 
@@ -9,6 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { login } = useAuth();
+  const { connectStrava } = useStrava();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -120,6 +122,17 @@ const Login = () => {
                 Sign In
               </button>
             </form>
+
+            <div className="login-divider">
+              <span className="divider-text">OR</span>
+            </div>
+
+            <button onClick={connectStrava} className="strava-login-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"></path>
+              </svg>
+              Sign in with Strava
+            </button>
 
             <div className="login-footer">
               <span className="footer-text">Don't have an account? </span>
