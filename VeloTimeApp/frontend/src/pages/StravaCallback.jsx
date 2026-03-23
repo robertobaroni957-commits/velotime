@@ -69,8 +69,12 @@ const StravaCallback = () => {
           
           // Se il server ha restituito una sessione, effettuiamo il login automatico
           if (data.session) {
+            console.log('DEBUG: Setting session from Strava...');
             const { error: sessionError } = await supabase.auth.setSession(data.session);
             if (sessionError) throw sessionError;
+            
+            // Piccola attesa per permettere all'AuthContext di aggiornarsi
+            await new Promise(resolve => setTimeout(resolve, 300));
             showSuccess('Accesso con Strava effettuato!');
           } else {
             showSuccess('Strava collegato con successo!');
