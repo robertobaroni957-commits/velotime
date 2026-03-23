@@ -22,13 +22,17 @@ const StravaCallback = () => {
       const error = params.get('error');
 
       if (error) {
+        console.error('DEBUG: Strava error param found:', error);
         showError(`Strava ha negato l'accesso: ${error}`);
-        navigate('/profile');
+        navigate('/login');
         return;
       }
 
       if (!code) {
+        console.warn('DEBUG: No code found in URL. Current path:', location.pathname + location.search);
         setStatus('Nessun codice trovato nel link.');
+        // Se arriviamo qui senza codice, torniamo al login dopo un po'
+        setTimeout(() => navigate('/login'), 3000);
         return;
       }
 
@@ -89,8 +93,8 @@ const StravaCallback = () => {
         console.error('ERRORE CRITICO CALLBACK:', err);
         setStatus(`Errore: ${err.message}`);
         showError(`Errore di collegamento: ${err.message}`);
-        // Lasciamo il messaggio a video per 5 secondi prima di uscire
-        setTimeout(() => navigate('/profile'), 5000);
+        // Torniamo al login dopo l'errore se non siamo autenticati
+        setTimeout(() => navigate('/login'), 5000);
       }
     };
 
